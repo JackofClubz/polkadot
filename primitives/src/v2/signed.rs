@@ -45,6 +45,14 @@ impl<Payload, RealPayload> Signed<Payload, RealPayload> {
 		self.0
 	}
 }
+pub struct Signed<Payload, RealPayload = Payload>(UncheckedSigned<Payload, RealPayload>);
+
+impl<Payload, RealPayload> Signed<Payload, RealPayload> {
+	/// Convert back to an unchecked type.
+	pub fn into_unchecked(self) -> UncheckedSigned<Payload, RealPayload> {
+		self.0
+	}
+}
 
 /// Unchecked signed data, can be converted to `Signed` by checking the signature.
 #[derive(Clone, PartialEq, Eq, RuntimeDebug, Encode, Decode, TypeInfo)]
